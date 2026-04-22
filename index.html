@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey Martin | Portabebés Ergonómicos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm-white: #FFFDF9;
+    --beige: #EDE5D8;
+    --beige-dark: #D9CDB8;
+    --sage: #8FA98C;
+    --sage-light: #B8CCAB;
+    --sage-dark: #5C7A59;
+    --blush: #E8C9B8;
+    --terracotta: #C47A5A;
+    --text-dark: #2C2416;
+    --text-mid: #6B5B45;
+    --text-light: #9E8B75;
+    --gold: #C9A86C;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(250,246,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(217,205,184,0.4);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(44,36,22,0.08); }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links {
+    display: flex; gap: 2.2rem; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: .9rem; font-weight: 500; letter-spacing: .02em;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--sage-dark); }
+
+  .nav-cta {
+    background: var(--sage);
+    color: #fff !important;
+    padding: .55rem 1.4rem !important;
+    border-radius: 50px !important;
+    transition: background .2s, transform .2s !important;
+  }
+  .nav-cta:hover { background: var(--sage-dark) !important; transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: .3s; }
+
+  /* ─── HERO ────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(143,169,140,.18) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatBlob 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -10%; left: -5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,201,184,.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatBlob 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes floatBlob {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(20px,-20px) scale(1.05); }
+  }
+
+  .hero-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5% 8% 5% 10%;
+    position: relative; z-index: 1;
+    animation: fadeUp .9s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--sage-light); color: var(--sage-dark);
+    padding: .4rem 1rem; border-radius: 50px;
+    font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; margin-bottom: 1.8rem;
+    width: fit-content;
+    animation: fadeUp .9s .1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 1.4rem;
+    animation: fadeUp .9s .2s ease both;
+  }
+  .hero-title em { color: var(--sage); font-style: italic; }
+
+  .hero-sub {
+    font-size: 1.05rem; color: var(--text-mid);
+    line-height: 1.7; max-width: 420px;
+    margin-bottom: 2.4rem;
+    animation: fadeUp .9s .3s ease both;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp .9s .4s ease both;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: #fff;
+    padding: .85rem 2rem;
+    border-radius: 50px;
+    font-size: .95rem; font-weight: 600;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background .25s, transform .2s, box-shadow .2s;
+    box-shadow: 0 6px 20px rgba(143,169,140,.35);
+  }
+  .btn-primary:hover { background: var(--sage-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(92,122,89,.35); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-dark);
+    padding: .85rem 2rem;
+    border-radius: 50px;
+    font-size: .95rem; font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--beige-dark);
+    transition: border-color .25s, color .25s, transform .2s;
+  }
+  .btn-secondary:hover { border-color: var(--sage); color: var(--sage-dark); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    animation: fadeUp .9s .5s ease both;
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--text-dark); line-height: 1;
+  }
+  .stat-label { font-size: .78rem; color: var(--text-light); margin-top: .2rem; }
+
+  .hero-image {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    animation: fadeUp .9s .15s ease both;
+  }
+
+  .hero-img-wrapper {
+    position: relative; width: 88%; height: 80%;
+    border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--sage-light) 100%);
+    box-shadow: 0 30px 80px rgba(44,36,22,0.15);
+    animation: morphBlob 10s ease-in-out infinite;
+  }
+  @keyframes morphBlob {
+    0%,100% { border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%; }
+    33% { border-radius: 55% 45% 40% 60% / 60% 55% 45% 40%; }
+    66% { border-radius: 45% 55% 60% 40% / 40% 60% 45% 55%; }
+  }
+
+  .hero-img-wrapper svg { width: 100%; height: 100%; object-fit: cover; }
+
+  /* SVG illustration inside hero */
+  .hero-illustration { width: 100%; height: 100%; }
+
+  .hero-img-badge {
+    position: absolute; bottom: 12%; right: -5%;
+    background: #fff;
+    border-radius: 16px;
+    padding: 1rem 1.3rem;
+    box-shadow: 0 12px 40px rgba(44,36,22,.15);
+    display: flex; align-items: center; gap: .8rem;
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .badge-icon { font-size: 1.8rem; }
+  .badge-text { font-size: .78rem; color: var(--text-mid); line-height: 1.3; }
+  .badge-text strong { display: block; color: var(--text-dark); font-size: .88rem; }
+
+  /* ─── SECTION BASE ────────────────────────────────── */
+  section { padding: 6rem 5%; }
+  .section-tag {
+    display: inline-block;
+    font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: .8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.2; color: var(--text-dark);
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--text-mid); font-size: 1rem; line-height: 1.7; max-width: 540px; }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-header .section-sub { margin: 0 auto; }
+
+  /* ─── PRODUCTS ────────────────────────────────────── */
+  #productos { background: var(--warm-white); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.8rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--beige);
+    transition: transform .3s, box-shadow .3s;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,36,22,.12); }
+
+  .product-img {
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative; overflow: hidden;
+  }
+
+  .product-badge-label {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--sage); color: #fff;
+    font-size: .7rem; font-weight: 700; letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: .3rem .8rem; border-radius: 50px;
+  }
+
+  .product-info { padding: 1.4rem; }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--text-dark); margin-bottom: .4rem;
+  }
+  .product-desc { font-size: .85rem; color: var(--text-light); margin-bottom: 1rem; line-height: 1.5; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-size: 1.25rem; font-weight: 700; color: var(--sage-dark); }
+  .product-price span { font-size: .8rem; font-weight: 400; color: var(--text-light); text-decoration: line-through; margin-right: .3rem; }
+
+  .btn-buy {
+    background: var(--cream); color: var(--sage-dark);
+    border: 1.5px solid var(--sage-light);
+    padding: .5rem 1.2rem; border-radius: 50px;
+    font-size: .85rem; font-weight: 600;
+    cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+    text-decoration: none;
+  }
+  .btn-buy:hover { background: var(--sage); color: #fff; border-color: var(--sage); }
+
+  /* Color swatches */
+  .product-colors { display: flex; gap: .4rem; margin-bottom: .8rem; }
+  .swatch { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1.5px rgba(0,0,0,.1); cursor: pointer; transition: transform .2s; }
+  .swatch:hover { transform: scale(1.2); }
+
+  /* Stars */
+  .product-stars { font-size: .8rem; color: var(--gold); margin-bottom: .6rem; }
+  .product-stars span { color: var(--text-light); font-size: .78rem; }
+
+  /* ─── BENEFITS ────────────────────────────────────── */
+  #beneficios { background: var(--cream); }
+
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .benefit-card {
+    background: #fff; border-radius: 20px;
+    padding: 2rem 1.8rem;
+    border: 1px solid var(--beige);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(44,36,22,.09); }
+
+  .benefit-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1.2rem;
+  }
+
+  .benefit-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: .5rem; }
+  .benefit-desc { font-size: .88rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ─── TESTIMONIOS ─────────────────────────────────── */
+  #testimonios { background: var(--warm-white); }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .testimonial-card {
+    background: var(--cream); border-radius: 20px;
+    padding: 2rem; border: 1px solid var(--beige);
+    transition: transform .3s;
+  }
+  .testimonial-card:hover { transform: translateY(-3px); }
+
+  .testimonial-stars { color: var(--gold); margin-bottom: 1rem; font-size: .95rem; }
+  .testimonial-text { font-size: .95rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.4rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: .8rem; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .author-name { font-weight: 600; font-size: .9rem; color: var(--text-dark); }
+  .author-city { font-size: .78rem; color: var(--text-light); }
+
+  /* ─── ABOUT ───────────────────────────────────────── */
+  #nosotros {
+    background: var(--sage);
+    color: #fff;
+    position: relative; overflow: hidden;
+  }
+  #nosotros::before {
+    content: '';
+    position: absolute; top: -30%; right: -10%;
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,.06);
+    border-radius: 50%;
+  }
+
+  .about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .about-content .section-tag { color: var(--sage-light); }
+  .about-content .section-title { color: #fff; }
+  .about-content .section-sub { color: rgba(255,255,255,.8); max-width: 100%; }
+
+  .about-milestones { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .milestone { text-align: center; }
+  .milestone-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; color: #fff; line-height: 1;
+  }
+  .milestone-label { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: .3rem; }
+
+  .about-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+
+  .about-card {
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 16px; padding: 1.4rem;
+  }
+  .about-card:first-child { grid-column: span 2; }
+  .about-card-icon { font-size: 1.8rem; margin-bottom: .6rem; }
+  .about-card-title { font-weight: 700; color: #fff; font-size: .95rem; margin-bottom: .3rem; }
+  .about-card-text { font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.5; }
+
+  /* ─── TIPS ────────────────────────────────────────── */
+  #consejos { background: var(--cream); }
+
+  .tips-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .tip-card {
+    background: #fff; border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--beige);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .tip-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(44,36,22,.09); }
+
+  .tip-header {
+    padding: 1.8rem; display: flex; gap: 1rem; align-items: flex-start;
+    border-bottom: 1px solid var(--beige);
+  }
+  .tip-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--sage-light); color: var(--sage-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: .85rem; flex-shrink: 0;
+  }
+  .tip-title { font-weight: 700; color: var(--text-dark); margin-bottom: .3rem; }
+  .tip-tag { font-size: .72rem; color: var(--sage); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .tip-body { padding: 1.4rem 1.8rem; font-size: .88rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* ─── COMPRA ──────────────────────────────────────── */
+  #comprar { background: var(--warm-white); }
+
+  .shop-inner {
+    max-width: 900px; margin: 0 auto;
+    background: var(--cream); border-radius: 28px; overflow: hidden;
+    border: 1px solid var(--beige);
+    box-shadow: 0 20px 60px rgba(44,36,22,.08);
+  }
+
+  .shop-tabs {
+    display: flex; background: var(--beige);
+  }
+  .shop-tab {
+    flex: 1; padding: 1rem;
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem; font-weight: 600;
+    color: var(--text-mid);
+    transition: background .2s, color .2s;
+    border-bottom: 3px solid transparent;
+  }
+  .shop-tab.active { background: var(--cream); color: var(--sage-dark); border-bottom-color: var(--sage); }
+
+  .shop-panel { display: none; padding: 2.5rem 3rem; }
+  .shop-panel.active { display: block; }
+
+  .shop-select-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 1rem; margin-bottom: 2rem;
+  }
+
+  .shop-item {
+    border: 2px solid var(--beige); border-radius: 16px; padding: 1.2rem;
+    text-align: center; cursor: pointer; transition: border-color .2s, box-shadow .2s;
+    background: #fff;
+  }
+  .shop-item:hover, .shop-item.selected { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(143,169,140,.15); }
+  .shop-item-icon { font-size: 2.2rem; margin-bottom: .6rem; }
+  .shop-item-name { font-size: .88rem; font-weight: 600; color: var(--text-dark); }
+  .shop-item-price { font-size: .8rem; color: var(--sage-dark); font-weight: 700; margin-top: .2rem; }
+
+  .shop-options { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .shop-label { font-size: .82rem; font-weight: 600; color: var(--text-mid); margin-bottom: .4rem; }
+
+  .shop-select, .shop-input {
+    width: 100%; padding: .7rem 1rem;
+    border: 1.5px solid var(--beige); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: .9rem;
+    color: var(--text-dark); background: #fff;
+    outline: none; transition: border-color .2s;
+  }
+  .shop-select:focus, .shop-input:focus { border-color: var(--sage); }
+
+  .shop-summary {
+    background: #fff; border-radius: 16px; padding: 1.4rem;
+    border: 1px solid var(--beige); margin-bottom: 1.5rem;
+    font-size: .9rem;
+  }
+  .summary-row { display: flex; justify-content: space-between; padding: .4rem 0; }
+  .summary-row.total { font-weight: 700; font-size: 1rem; border-top: 1px solid var(--beige); margin-top: .4rem; padding-top: .8rem; color: var(--sage-dark); }
+
+  .btn-full {
+    width: 100%; padding: 1rem;
+    background: var(--sage); color: #fff;
+    border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: background .25s, transform .2s;
+    box-shadow: 0 6px 20px rgba(143,169,140,.35);
+  }
+  .btn-full:hover { background: var(--sage-dark); transform: translateY(-1px); }
+
+  .success-msg {
+    text-align: center; display: none; padding: 2rem 0;
+  }
+  .success-msg .check { font-size: 3rem; margin-bottom: 1rem; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; color: var(--sage-dark); margin-bottom: .5rem; }
+  .success-msg p { color: var(--text-mid); font-size: .9rem; }
+
+  /* Contact tab */
+  .contact-form { display: grid; gap: 1rem; }
+  .contact-form input, .contact-form textarea, .contact-form select {
+    width: 100%; padding: .8rem 1.2rem;
+    border: 1.5px solid var(--beige); border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: .9rem;
+    outline: none; transition: border-color .2s;
+    background: #fff; color: var(--text-dark);
+  }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--sage); }
+  .contact-form textarea { height: 110px; resize: vertical; }
+
+  /* ─── CONTACTO ────────────────────────────────────── */
+  #contacto { background: var(--cream); }
+
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+
+  .contact-channels { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .channel-btn {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.4rem; border-radius: 14px;
+    text-decoration: none; font-weight: 600; font-size: .9rem;
+    transition: transform .2s, box-shadow .2s;
+    border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .channel-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .channel-btn.whatsapp { background: #25D366; color: #fff; }
+  .channel-btn.instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+  .channel-btn.email { background: var(--text-dark); color: #fff; }
+  .channel-icon { font-size: 1.3rem; }
+
+  .contact-form-section { background: #fff; border-radius: 24px; padding: 2.5rem; border: 1px solid var(--beige); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-full { grid-column: span 2; }
+
+  .form-input {
+    width: 100%; padding: .8rem 1.2rem;
+    border: 1.5px solid var(--beige); border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: .9rem;
+    outline: none; transition: border-color .2s; color: var(--text-dark);
+  }
+  .form-input:focus { border-color: var(--sage); }
+  .form-label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-mid); margin-bottom: .4rem; }
+  textarea.form-input { height: 100px; resize: vertical; }
+
+  /* ─── FOOTER ──────────────────────────────────────── */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,.7);
+    padding: 4rem 5% 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { color: #fff; font-size: 1.4rem; }
+  .footer-brand p { margin-top: 1rem; font-size: .85rem; line-height: 1.7; }
+
+  .footer-col h4 { color: #fff; font-size: .9rem; font-weight: 700; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+  .footer-col a { color: rgba(255,255,255,.6); font-size: .85rem; text-decoration: none; transition: color .2s; }
+  .footer-col a:hover { color: var(--sage-light); }
+
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .82rem; flex-wrap: wrap; gap: .5rem;
+  }
+
+  /* ─── WHATSAPP FLOAT ──────────────────────────────── */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(37,211,102,.4);
+    text-decoration: none; font-size: 1.6rem;
+    animation: waPulse 2.5s ease-in-out infinite;
+    transition: transform .2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  @keyframes waPulse {
+    0%,100% { box-shadow: 0 8px 30px rgba(37,211,102,.4); }
+    50% { box-shadow: 0 8px 40px rgba(37,211,102,.65), 0 0 0 10px rgba(37,211,102,.08); }
+  }
+
+  /* ─── BANNER PROMO ────────────────────────────────── */
+  .promo-banner {
+    background: var(--sage);
+    color: #fff; text-align: center;
+    padding: .75rem 2rem;
+    font-size: .88rem; font-weight: 500;
+  }
+  .promo-banner strong { font-weight: 700; }
+
+  /* ─── ANIMATIONS ON SCROLL ────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-image { height: 55vw; max-height: 400px; order: -1; }
+    .hero-content { padding: 3rem 6%; text-align: center; align-items: center; }
+    .hero-sub { margin: 0 auto 2rem; }
+    .hero-stats { justify-content: center; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-full { grid-column: span 1; }
+    .shop-options { grid-template-columns: 1fr; }
+    .shop-panel { padding: 2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 4rem 5%; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .about-milestones { gap: 1.5rem; }
+    .hero-buttons { justify-content: center; }
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--text-dark); text-decoration: none; transition: color .2s;
+  }
+  .mobile-menu a:hover { color: var(--sage); }
+  .mobile-close { position: absolute; top: 1.5rem; right: 5%; font-size: 2rem; cursor: pointer; color: var(--text-dark); background: none; border: none; }
+</style>
+</head>
+<body>
+
+<!-- Promo Banner -->
+<div class="promo-banner">
+  🌿 <strong>Envío gratis</strong> en compras mayores a $200.000 · Garantía de 12 meses incluida
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Hey Mart<span>i</span>n</a>
+  <ul class="nav-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#testimonios">Opiniones</a></li>
+    <li><a href="#consejos">Guía</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#comprar" class="nav-cta">Comprar</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#productos" onclick="toggleMenu()">Productos</a>
+  <a href="#beneficios" onclick="toggleMenu()">Beneficios</a>
+  <a href="#testimonios" onclick="toggleMenu()">Opiniones</a>
+  <a href="#consejos" onclick="toggleMenu()">Guía</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  <a href="#comprar" onclick="toggleMenu()" style="color:var(--sage)">Comprar ahora</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-badge">✦ Porteo ergonómico certificado</div>
+    <h1 class="hero-title">
+      Comodidad, cercanía<br>y <em>seguridad</em><br>para tu bebé
+    </h1>
+    <p class="hero-sub">
+      Portabebés diseñados con amor y respaldados por expertos en ergonomía infantil. Porque el mejor lugar del mundo está en tus brazos.
+    </p>
+    <div class="hero-buttons">
+      <a href="#productos" class="btn-primary">Ver productos →</a>
+      <a href="#comprar" class="btn-secondary">Comprar ahora</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3.2K+</div>
+        <div class="stat-label">familias felices</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8 años</div>
+        <div class="stat-label">de experiencia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">telas certificadas</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-img-wrapper">
+      <!-- Illustrated hero: mother with baby -->
+      <svg class="hero-illustration" viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" style="stop-color:#E8C9B8;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#B8CCAB;stop-opacity:1"/>
+          </radialGradient>
+          <radialGradient id="skinGrad" cx="40%" cy="40%" r="60%">
+            <stop offset="0%" style="stop-color:#F5D5B8"/>
+            <stop offset="100%" style="stop-color:#E8B89A"/>
+          </radialGradient>
+        </defs>
+        <!-- Background -->
+        <rect width="400" height="460" fill="url(#bgGrad)"/>
+        <!-- Soft circles -->
+        <circle cx="320" cy="80" r="90" fill="rgba(255,255,255,0.15)"/>
+        <circle cx="60" cy="360" r="70" fill="rgba(255,255,255,0.12)"/>
+        <!-- Body / carrier wrap -->
+        <ellipse cx="200" cy="290" rx="110" ry="130" fill="#A67C63" opacity=".9"/>
+        <!-- Carrier fabric detail -->
+        <path d="M110 230 Q200 260 290 230 L285 310 Q200 340 115 310 Z" fill="#8B6347"/>
+        <path d="M130 200 Q200 180 270 200 L280 240 Q200 250 120 240 Z" fill="#9B7357"/>
+        <!-- Straps going over shoulders -->
+        <path d="M155 220 Q140 190 120 160 Q110 140 125 130" stroke="#A67C63" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <path d="M245 220 Q260 190 280 160 Q290 140 275 130" stroke="#A67C63" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <!-- Mom torso -->
+        <rect x="140" y="230" width="120" height="80" rx="20" fill="url(#skinGrad)" opacity=".3"/>
+        <!-- Mom neck -->
+        <rect x="188" y="118" width="24" height="35" rx="12" fill="url(#skinGrad)"/>
+        <!-- Mom head -->
+        <ellipse cx="200" cy="100" rx="42" ry="48" fill="url(#skinGrad)"/>
+        <!-- Mom hair -->
+        <path d="M158 95 Q160 45 200 40 Q240 45 242 95 Q235 68 200 65 Q165 68 158 95Z" fill="#4A2F1A"/>
+        <path d="M158 95 Q150 110 153 130 Q160 150 165 165" stroke="#4A2F1A" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M242 95 Q250 110 247 130 Q240 150 235 165" stroke="#4A2F1A" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- Mom face: eyes -->
+        <ellipse cx="185" cy="100" rx="5" ry="6" fill="#3D2314"/>
+        <ellipse cx="215" cy="100" rx="5" ry="6" fill="#3D2314"/>
+        <circle cx="184" cy="98" r="2" fill="rgba(255,255,255,0.7)"/>
+        <circle cx="214" cy="98" r="2" fill="rgba(255,255,255,0.7)"/>
+        <!-- Smile -->
+        <path d="M188 115 Q200 125 212 115" stroke="#C47A5A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Baby head peeking out -->
+        <ellipse cx="200" cy="215" rx="28" ry="30" fill="#F5D5C0"/>
+        <!-- Baby hair -->
+        <path d="M178 210 Q200 190 222 210" stroke="#8B6347" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- Baby face -->
+        <circle cx="191" cy="218" r="3.5" fill="#3D2314"/>
+        <circle cx="209" cy="218" r="3.5" fill="#3D2314"/>
+        <path d="M195 228 Q200 233 205 228" stroke="#C47A5A" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Mom arms -->
+        <path d="M140 270 Q115 290 108 330 Q105 345 120 355" stroke="url(#skinGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M260 270 Q285 290 292 330 Q295 345 280 355" stroke="url(#skinGrad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <!-- Hands -->
+        <ellipse cx="120" cy="358" rx="16" ry="12" fill="#E8B89A"/>
+        <ellipse cx="280" cy="358" rx="16" ry="12" fill="#E8B89A"/>
+        <!-- Decorative flowers -->
+        <g transform="translate(45,50)">
+          <circle r="6" fill="#C47A5A" opacity=".6"/>
+          <circle cx="12" r="5" fill="#A67C63" opacity=".5"/>
+          <circle cx="-12" r="5" fill="#A67C63" opacity=".5"/>
+          <circle cy="-12" r="5" fill="#A67C63" opacity=".5"/>
+          <circle cy="12" r="5" fill="#A67C63" opacity=".5"/>
+        </g>
+        <g transform="translate(355,400)">
+          <circle r="5" fill="#8FA98C" opacity=".7"/>
+          <circle cx="10" r="4" fill="#B8CCAB" opacity=".6"/>
+          <circle cx="-10" r="4" fill="#B8CCAB" opacity=".6"/>
+          <circle cy="-10" r="4" fill="#B8CCAB" opacity=".6"/>
+        </g>
+        <!-- Stars / sparkles -->
+        <text x="305" y="60" font-size="18" opacity=".6">✦</text>
+        <text x="70" y="170" font-size="14" opacity=".5">✦</text>
+        <text x="330" y="320" font-size="12" opacity=".45">✦</text>
+        <!-- Certification badge -->
+        <g transform="translate(60,370)">
+          <rect width="70" height="36" rx="10" fill="rgba(255,255,255,0.85)"/>
+          <text x="7" y="14" font-size="8" font-family="sans-serif" fill="#5C7A59" font-weight="bold">✔ Cert.</text>
+          <text x="7" y="27" font-size="7" font-family="sans-serif" fill="#8FA98C">Ergonómico</text>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-img-badge">
+      <span class="badge-icon">🏅</span>
+      <div class="badge-text">
+        <strong>Certificado ISO</strong>
+        Seguridad comprobada
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="productos">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Catálogo</span>
+    <h2 class="section-title">Nuestros portabebés</h2>
+    <p class="section-sub">Cada modelo fue diseñado pensando en tu comodidad y en el desarrollo saludable de tu bebé.</p>
+  </div>
+
+  <div class="products-grid">
+    <!-- Card 1 -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #E8D5C4 0%, #D9C5AF 100%);">
+        <span><img src="1.PNG" alt="b"></span>
+        <span class="product-badge-label">Más vendido</span>
+      </div>
+      <div class="product-info">
+        <div class="product-stars">★★★★★ <span>(128 reseñas)</span></div>
+        <div class="product-name">Nidito Clásico</div>
+        <div class="product-desc">Portabebé ergonómico de lino orgánico. Ideal para recién nacidos hasta 20 kg.</div>
+        <div class="product-colors">
+          <div class="swatch" style="background:#8FA98C" title="Sage"></div>
+          <div class="swatch" style="background:#E8C9B8" title="Blush"></div>
+          <div class="swatch" style="background:#2C2416" title="Midnight"></div>
+          <div class="swatch" style="background:#C9A86C" title="Sand"></div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price"><span>$189.000</span>$159.000</div>
+          <a href="#comprar" class="btn-buy">Comprar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #B8CCAB 0%, #9BB89A 100%);">
+        <span><img src="2.PNG" alt=""></span>
+        <span class="product-badge-label">Nuevo</span>
+      </div>
+      <div class="product-info">
+        <div class="product-stars">★★★★★ <span>(86 reseñas)</span></div>
+        <div class="product-name">Nidito Wrap</div>
+        <div class="product-desc">Fular elástico de algodón peinado. Suave, transpirable y perfecto para newborns.</div>
+        <div class="product-colors">
+          <div class="swatch" style="background:#8FA98C"></div>
+          <div class="swatch" style="background:#FAF6F0"></div>
+          <div class="swatch" style="background:#E8C9B8"></div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$139.000</div>
+          <a href="#comprar" class="btn-buy">Comprar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #F0DDD0 0%, #E8C9B8 100%);">
+        <span><img src="3.PNG" alt=""></span>
+      </div>
+      <div class="product-info">
+        <div class="product-stars">★★★★☆ <span>(54 reseñas)</span></div>
+        <div class="product-name">Nidito Pro</div>
+        <div class="product-desc">Mochila portabebé con respaldo lumbar reforzado. Para paseos largos y senderismo suave.</div>
+        <div class="product-colors">
+          <div class="swatch" style="background:#4A2F1A"></div>
+          <div class="swatch" style="background:#8FA98C"></div>
+          <div class="swatch" style="background:#C47A5A"></div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price"><span>$229.000</span>$199.000</div>
+          <a href="#comprar" class="btn-buy">Comprar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #D9CDB8 0%, #C9BDA8 100%);">
+        <span><img src="4.PNG" alt=""></span>
+        <span class="product-badge-label">Oferta</span>
+      </div>
+      <div class="product-info">
+        <div class="product-stars">★★★★★ <span>(42 reseñas)</span></div>
+        <div class="product-name">Nidito Primavera</div>
+        <div class="product-desc">Edición limitada en tela de bambú. Ultraligero, perfecto para climas cálidos.</div>
+        <div class="product-colors">
+          <div class="swatch" style="background:#E8C9B8"></div>
+          <div class="swatch" style="background:#B8CCAB"></div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price"><span>$175.000</span>$145.000</div>
+          <a href="#comprar" class="btn-buy">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="beneficios">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ ¿Por qué elegirnos?</span>
+    <h2 class="section-title">Pensado para ti y tu bebé</h2>
+    <p class="section-sub">Cada detalle fue diseñado con un propósito: que mamá y papá estén cómodos, y el bebé feliz.</p>
+  </div>
+
+  <div class="benefits-grid">
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#E8F4E5;">🏅</div>
+      <div class="benefit-title">Ergonomía certificada</div>
+      <div class="benefit-desc">Diseño validado por fisioterapeutas pediátricos. Posición M ideal para las caderas del bebé.</div>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#FFF0E8;">🛡️</div>
+      <div class="benefit-title">Seguridad ante todo</div>
+      <div class="benefit-desc">Cumplimos con normativas internacionales EN13209. Costuras reforzadas en todos los puntos de tensión.</div>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#F0EEF8;">💆</div>
+      <div class="benefit-title">Comodidad para padres</div>
+      <div class="benefit-desc">Distribución equilibrada del peso. Reducimos la carga en espalda baja hasta un 40% vs. portabebés convencionales.</div>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#F5F0E8;">🌿</div>
+      <div class="benefit-title">Materiales de calidad</div>
+      <div class="benefit-desc">Solo usamos telas OEKO-TEX® 100, sin químicos nocivos, suaves en la piel sensible del bebé.</div>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#E8F4E5;">🔧</div>
+      <div class="benefit-title">Ajuste intuitivo</div>
+      <div class="benefit-desc">Sistema de hebillas patentado que se ajusta en segundos, incluso con una sola mano.</div>
+    </div>
+    <div class="benefit-card reveal">
+      <div class="benefit-icon" style="background:#FFF0E8;">🌡️</div>
+      <div class="benefit-title">Todo clima</div>
+      <div class="benefit-desc">Paneles de malla transpirable para verano e insertos de forro polar opcionales para el invierno.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Familias felices</span>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub">Más de 3.200 familias ya confían en Nidito. Sus palabras nos llenan de orgullo.</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Lo compré cuando mi bebé tenía 3 semanas y fue un antes y un después. Se duerme en minutos y yo puedo hacer mis cosas con las manos libres. ¡Indispensable!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#E8D5C4;">👩</div>
+        <div>
+          <div class="author-name">Valentina M.</div>
+          <div class="author-city">Mamá de Sofía, 4 meses · Bogotá</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Soy papá primerizo y estaba nervioso de usarlo, pero el video de la marca me guió en cada paso. Mi espalda lo agradece después de salidas largas."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#D9CDB8;">👨</div>
+        <div>
+          <div class="author-name">Sebastián R.</div>
+          <div class="author-city">Papá de Mateo, 7 meses · Medellín</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"La atención fue increíble, me ayudaron a elegir el modelo ideal para mi bebé con displasia. Lo recomiendo a todas las mamás de mi grupo."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#B8CCAB;">👩</div>
+        <div>
+          <div class="author-name">Camila P.</div>
+          <div class="author-city">Mamá de Lucas, 5 meses · Cali</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="nosotros">
+  <div class="about-inner">
+    <div class="about-content">
+      <span class="section-tag">✦ Nuestra historia</span>
+      <h2 class="section-title">Nacimos de una necesidad, crecimos con amor</h2>
+      <p class="section-sub">Nidito nació en 2016 cuando Andrea y Felipe, padres primerizos de Bucaramanga, no encontraban un portabebé que fuera bonito, cómodo y seguro al mismo tiempo. Decidieron crear el suyo. Hoy, 8 años después, somos la marca de porteo de confianza de miles de familias colombianas.</p>
+      <div class="about-milestones">
+        <div class="milestone">
+          <div class="milestone-num">8+</div>
+          <div class="milestone-label">años fabricando</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-num">3.2K</div>
+          <div class="milestone-label">familias felices</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-num">12</div>
+          <div class="milestone-label">meses de garantía</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-num">100%</div>
+          <div class="milestone-label">hecho en Colombia</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-card">
+        <div class="about-card-icon">🏠</div>
+        <div class="about-card-title">Empresa familiar</div>
+        <div class="about-card-text">Somos un emprendimiento familiar con corazón colombiano. Cada portabebé es revisado a mano antes de llegar a tu hogar.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🌿</div>
+        <div class="about-card-title">Sostenibles</div>
+        <div class="about-card-text">Usamos telas OEKO-TEX® y procesos de producción con bajo impacto ambiental.</div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">❤️</div>
+        <div class="about-card-title">Comunidad</div>
+        <div class="about-card-text">Acompañamos a cada familia con guías, videos y soporte post-venta real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS / EDUCATIVO -->
+<section id="consejos">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Guía de porteo</span>
+    <h2 class="section-title">Porteo ergonómico: lo que debes saber</h2>
+    <p class="section-sub">Un porteo correcto es beneficioso para el desarrollo neurológico, emocional y físico de tu bebé.</p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">01</div>
+        <div>
+          <div class="tip-tag">Postura</div>
+          <div class="tip-title">La posición M es clave</div>
+        </div>
+      </div>
+      <div class="tip-body">Las rodillas del bebé deben quedar más altas que sus glúteos, formando una "M". Esta postura protege las caderas y favorece el desarrollo de las articulaciones coxofemorales.</div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">02</div>
+        <div>
+          <div class="tip-tag">Seguridad</div>
+          <div class="tip-title">Regla TICKS siempre vigente</div>
+        </div>
+      </div>
+      <div class="tip-body">Tight (ajustado), In view at all times, Close enough to kiss, Keeping chin off chest, Supported back. Estas 5 reglas garantizan un porteo seguro desde el primer día.</div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">03</div>
+        <div>
+          <div class="tip-tag">Edad</div>
+          <div class="tip-title">¿Desde cuándo puedo portear?</div>
+        </div>
+      </div>
+      <div class="tip-body">Desde el nacimiento con el modelo adecuado. Los recién nacidos se benefician enormemente del contacto piel con piel que ofrece el porteo. Solo asegúrate de que la cabeza esté soportada.</div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">04</div>
+        <div>
+          <div class="tip-tag">Beneficios</div>
+          <div class="tip-title">Vínculo y desarrollo</div>
+        </div>
+      </div>
+      <div class="tip-body">Estudios muestran que los bebés porteados lloran hasta un 43% menos. El movimiento rítmico estimula el sistema vestibular y favorece el desarrollo cognitivo temprano.</div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">05</div>
+        <div>
+          <div class="tip-tag">Clima</div>
+          <div class="tip-title">Porteo en épocas de calor</div>
+        </div>
+      </div>
+      <div class="tip-body">Elige telas de lino o bambú, evita capas innecesarias entre tú y el bebé, y asegúrate de hidratarlos a ambos. Revisa la temperatura del cuello del bebé regularmente.</div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-header">
+        <div class="tip-num">06</div>
+        <div>
+          <div class="tip-tag">Cuidados</div>
+          <div class="tip-title">Lava bien tu portabebé</div>
+        </div>
+      </div>
+      <div class="tip-body">Lava en frío a 30°C sin centrifugado intenso. Seca a la sombra para preservar la elasticidad de las telas. Revisa costuras y hebillas antes de cada uso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPRAR -->
+<section id="comprar">
+  <div class="section-header reveal">
+    <span class="section-tag">✦ Pedido fácil</span>
+    <h2 class="section-title">Haz tu pedido en minutos</h2>
+    <p class="section-sub">Selecciona tu modelo, personaliza y recíbelo en la puerta de tu casa.</p>
+  </div>
+
+  <div class="shop-inner reveal">
+    <div class="shop-tabs">
+      <button class="shop-tab active" onclick="switchTab('orden')">🛒 Hacer pedido</button>
+      <button class="shop-tab" onclick="switchTab('contacto2')">💬 Consultar</button>
+    </div>
+
+    <!-- Orden panel -->
+    <div class="shop-panel active" id="panel-orden">
+      <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:1.5rem;">Selecciona el modelo que más te gusta:</p>
+      <div class="shop-select-grid">
+        <div class="shop-item selected" onclick="selectItem(this,'Nidito Clásico',159000)">
+          <div class="shop-item-icon">🪆</div>
+          <div class="shop-item-name">Clásico</div>
+          <div class="shop-item-price">$159.000</div>
+        </div>
+        <div class="shop-item" onclick="selectItem(this,'Nidito Wrap',139000)">
+          <div class="shop-item-icon">🌿</div>
+          <div class="shop-item-name">Wrap</div>
+          <div class="shop-item-price">$139.000</div>
+        </div>
+        <div class="shop-item" onclick="selectItem(this,'Nidito Pro',199000)">
+          <div class="shop-item-icon">🎒</div>
+          <div class="shop-item-name">Pro</div>
+          <div class="shop-item-price">$199.000</div>
+        </div>
+        <div class="shop-item" onclick="selectItem(this,'Nidito Primavera',145000)">
+          <div class="shop-item-icon">🌸</div>
+          <div class="shop-item-name">Primavera</div>
+          <div class="shop-item-price">$145.000</div>
+        </div>
+      </div>
+      <div class="shop-options">
+        <div>
+          <div class="shop-label">Color</div>
+          <select class="shop-select">
+            <option>Sage (Verde suave)</option>
+            <option>Blush (Rosa palo)</option>
+            <option>Midnight (Negro)</option>
+            <option>Sand (Arena)</option>
+          </select>
+        </div>
+        <div>
+          <div class="shop-label">Talla del portador</div>
+          <select class="shop-select">
+            <option>XS — S (talla 32–36)</option>
+            <option>M — L (talla 38–44)</option>
+            <option>XL — XXL (talla 46–52)</option>
+          </select>
+        </div>
+        <div>
+          <div class="shop-label">Tu nombre</div>
+          <input class="shop-input" type="text" placeholder="Ej. Valentina Mora">
+        </div>
+        <div>
+          <div class="shop-label">Ciudad de entrega</div>
+          <input class="shop-input" type="text" placeholder="Ej. Bogotá">
+        </div>
+      </div>
+      <div class="shop-summary" id="shopSummary">
+        <div class="summary-row"><span>Producto</span><span id="sumProduct">Nidito Clásico</span></div>
+        <div class="summary-row"><span>Subtotal</span><span id="sumPrice">$159.000</span></div>
+        <div class="summary-row"><span>Envío</span><span style="color:var(--sage)">GRATIS</span></div>
+        <div class="summary-row total"><span>Total</span><span id="sumTotal">$159.000</span></div>
+      </div>
+      <button class="btn-full" onclick="placeOrder()">Confirmar pedido →</button>
+      <div class="success-msg" id="successMsg">
+        <div class="check">🎉</div>
+        <h3>¡Pedido recibido!</h3>
+        <p>Te contactaremos en menos de 24 horas por WhatsApp para confirmar los detalles de tu entrega.</p>
+      </div>
+    </div>
+
+    <!-- Contacto panel -->
+    <div class="shop-panel" id="panel-contacto2">
+      <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:1.5rem;">¿Tienes preguntas antes de comprar? Escríbenos y te asesoramos con gusto.</p>
+      <div class="contact-form">
+        <input type="text" placeholder="Tu nombre" style="padding:.8rem 1.2rem;border:1.5px solid var(--beige);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;background:#fff;color:var(--text-dark);">
+        <input type="text" placeholder="WhatsApp o correo" style="padding:.8rem 1.2rem;border:1.5px solid var(--beige);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;background:#fff;color:var(--text-dark);">
+        <select style="padding:.8rem 1.2rem;border:1.5px solid var(--beige);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;background:#fff;color:var(--text-mid);">
+          <option>¿Cuál es mi modelo ideal?</option>
+          <option>Dudas sobre tallas</option>
+          <option>Información de envíos</option>
+          <option>Cambios y devoluciones</option>
+          <option>Otro</option>
+        </select>
+        <textarea placeholder="Cuéntanos más..." style="padding:.8rem 1.2rem;border:1.5px solid var(--beige);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;background:#fff;color:var(--text-dark);height:100px;resize:vertical;"></textarea>
+        <button class="btn-full" onclick="sendConsult()">Enviar consulta 💬</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-tag">✦ Contáctanos</span>
+      <h2 class="section-title">Estamos aquí para ti</h2>
+      <p class="section-sub">Respondemos todas las consultas en menos de 24 horas. Nuestro equipo de mamás y papás te atenderá con mucho cariño.</p>
+      <div class="contact-channels">
+        <a href="https://wa.me/573000000000" class="channel-btn whatsapp">
+          <span class="channel-icon">💬</span>
+          Chatearnos por WhatsApp
+        </a>
+        <a href="https://instagram.com/nidito.portabebes" class="channel-btn instagram">
+          <span class="channel-icon">📸</span>
+          Síguenos en Instagram
+        </a>
+        <a href="mailto:hola@nidito.co" class="channel-btn email">
+          <span class="channel-icon">✉️</span>
+          hola@nidito.co
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form-section reveal">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text-dark);margin-bottom:1.5rem;">Envíanos un mensaje</h3>
+      <div class="form-grid">
+        <div>
+          <label class="form-label">Nombre</label>
+          <input class="form-input" type="text" placeholder="Tu nombre">
+        </div>
+        <div>
+          <label class="form-label">Ciudad</label>
+          <input class="form-input" type="text" placeholder="Bogotá, Medellín...">
+        </div>
+        <div class="form-full">
+          <label class="form-label">Correo o WhatsApp</label>
+          <input class="form-input" type="text" placeholder="hola@correo.com o +57 300...">
+        </div>
+        <div class="form-full">
+          <label class="form-label">Mensaje</label>
+          <textarea class="form-input" placeholder="¿En qué podemos ayudarte?"></textarea>
+        </div>
+        <div class="form-full">
+          <button class="btn-primary" style="width:100%;padding:1rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.95rem;" onclick="submitContact()">
+            Enviar mensaje ✦
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Hey Mart<span style="color:var(--sage-light)">i</span>n</a>
+      <p>Portabebés ergonómicos hechos con amor en Colombia. Porque cada momento contigo importa.</p>
+      <p style="margin-top:.8rem;font-size:.8rem;color:rgba(255,255,255,.4)">📍 Bucaramanga, Colombia</p>
+    </div>
+    <div class="footer-col">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="#productos">Nidit Clásico</a></li>
+        <li><a href="#productos">Nidito Wrap</a></li>
+        <li><a href="#productos">Nidito Pro</a></li>
+        <li><a href="#productos">Nidito Primavera</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#consejos">Guía de porteo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#">Envíos y entregas</a></li>
+        <li><a href="#">Cambios y devoluciones</a></li>
+        <li><a href="#">Garantía</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Hey Martin · Todos los derechos reservados</span>
+    <span>Hecho con ❤️ en Colombia</span>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/573000000000" class="wa-float" title="Chatear por WhatsApp">💬</a>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Product selection
+  let selectedProduct = 'Nidito Clásico';
+  let selectedPrice = 159000;
+
+  function selectItem(el, name, price) {
+    document.querySelectorAll('.shop-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedProduct = name;
+    selectedPrice = price;
+    document.getElementById('sumProduct').textContent = name;
+    document.getElementById('sumPrice').textContent = '$' + price.toLocaleString('es-CO');
+    document.getElementById('sumTotal').textContent = '$' + price.toLocaleString('es-CO');
+  }
+
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.shop-panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  // Place order
+  function placeOrder() {
+    const btn = event.target;
+    btn.textContent = '⏳ Procesando...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('shopSummary').style.display = 'none';
+      btn.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 1800);
+  }
+
+  // Send consult
+  function sendConsult() {
+    event.target.textContent = '✅ ¡Enviado! Te escribimos pronto.';
+    event.target.style.background = 'var(--sage-dark)';
+    event.target.disabled = true;
+  }
+
+  // Contact submit
+  function submitContact() {
+    event.target.textContent = '✅ Mensaje enviado con éxito';
+    event.target.style.background = 'var(--sage-dark)';
+    event.target.disabled = true;
+  }
+
+  // Smooth focus on inputs
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('focus', function() { this.style.borderColor = 'var(--sage)'; });
+    el.addEventListener('blur', function() { this.style.borderColor = 'var(--beige)'; });
+  });
+</script>
+</body>
+</html>
